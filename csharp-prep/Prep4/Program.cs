@@ -47,6 +47,7 @@ class Program
         int minorNumber = numbers[0];
         for(int num = 0; num < numbers.Count; num++)
         {
+            // I added an opcional condition that checks if a number in a list is major than 0
             if((numbers[num] < majorNumber) & numbers[num] > 0)
             {
                 minorNumber = numbers[num];
