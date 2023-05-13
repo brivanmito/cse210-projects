@@ -38,10 +38,10 @@ public class PromptGenerator
 
     public void EliminateDuplicatedPrompts()
     {
-        string last_prompt = _lines[_lines.Count()-1];
+        string last_prompt = _lines[_lines.Count() - 1];
         _lines[_randPosition] = last_prompt;
 
-        Array.Resize(ref _lines, _lines.Count()-1);
+        Array.Resize(ref _lines, _lines.Count() - 1);
         Console.ForegroundColor = ConsoleColor.DarkGray;
     }
 

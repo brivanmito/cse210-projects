@@ -9,7 +9,7 @@ public class Journal
     public List<Entry> _entries = new List<Entry>();
     public string _filename;
 
-    
+
     public void AddingEntry(Entry a, PromptGenerator b)
     {
         a._dateAndTime = DateTime.Now;
@@ -37,7 +37,7 @@ public class Journal
             Console.Write("Press Enter....");
 
         }
-        
+
     }
     public void DisplayingAllTheEntries()
     {
@@ -96,12 +96,13 @@ public class Journal
         try
         {
             List<string[]> lines = new List<string[]>();
-            using (TextFieldParser parser = new TextFieldParser(_filename)) 
+            using (TextFieldParser parser = new TextFieldParser(_filename))
             {
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(",", "\t");
 
-                while (!parser.EndOfData) {
+                while (!parser.EndOfData)
+                {
                     string[] row = parser.ReadFields();
                     lines.Add(row);
                 }

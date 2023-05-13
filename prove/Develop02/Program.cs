@@ -4,19 +4,19 @@
 
 // Showing Creativity and Exceeding Requirements
 // 1. Think of other problems that keep people from writing in their journal and address one of those.
-     // * One of the issues why people don't keep a diary is because they feel they have nothing to say, which may tempt them not to write in their diary.
-     // * The application has many validations where it verifies that the input is a non-empty string of text, so the user will be more motivated to write because they cannot save anything until they answer the prompt.
+// * One of the issues why people don't keep a diary is because they feel they have nothing to say, which may tempt them not to write in their diary.
+// * The application has many validations where it verifies that the input is a non-empty string of text, so the user will be more motivated to write because they cannot save anything until they answer the prompt.
 
 // 2. Save other information in the journal entry.
-     // * I found it necessary to save the time when the user writes in their diary, so they can know based on saved entries which time is better for them to write
+// * I found it necessary to save the time when the user writes in their diary, so they can know based on saved entries which time is better for them to write
 
 // 3. Improve the process of saving and loading to save as a .csv file that could be opened in Excel (make sure to account for quotation marks and commas correctly in your content.
-     // * "I used the TextFieldParser class, which is part of the Microsoft.VisualBasic.FileIO library in C#. 
-    //      This class helped me with reading CSV files that contain double quotes (""). In my program, when a user 
-    //      enters an input that contains commas (,), the program saves it in the .csv file as follows: 
-    //      "Hello, My name is Bryan". Therefore, when I tried to read it conventionally with the separator (,), 
-    //      it would split the input into several fields. The TextFieldParser class allowed me to read files, 
-    //      regardless of whether they have commas in the input. This allows them to be opened correctly in Excel."
+// * "I used the TextFieldParser class, which is part of the Microsoft.VisualBasic.FileIO library in C#. 
+//      This class helped me with reading CSV files that contain double quotes (""). In my program, when a user 
+//      enters an input that contains commas (,), the program saves it in the .csv file as follows: 
+//      "Hello, My name is Bryan". Therefore, when I tried to read it conventionally with the separator (,), 
+//      it would split the input into several fields. The TextFieldParser class allowed me to read files, 
+//      regardless of whether they have commas in the input. This allows them to be opened correctly in Excel."
 
 // Colors: I used colors in the menu, and I also set the color Magenta for all user inputs
 // The prompts are not repeated during the program's execution.
@@ -38,7 +38,7 @@ class Program
         PromptGenerator prompts = new PromptGenerator();
         //Call the method LoadingPrompts to read the prompts saved in the file.
         prompts.LoadingPrompts();
-        while(!exit)
+        while (!exit)
         {
             Console.Clear();
             Console.WriteLine("     MY JOURNAL APP\n");
@@ -59,41 +59,41 @@ class Program
 
                 switch (option)
                 {
-                case 1:
-                    // Each time the user wants to enter an input, an object of the Entry class will be created.
-                    Entry entry = new Entry();
-                    // This object will use the ChoosingRandomPrompts method to randomly select a prompt.
-                    prompts.ChoosingRandomPrompts();
-                    // The prompts object contains the prompt that will be displayed, therefore it should 
-                    //   be stored in the _prompt attribute of the entry object.
-                    entry._prompt = prompts._randomPrompt;
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    case 1:
+                        // Each time the user wants to enter an input, an object of the Entry class will be created.
+                        Entry entry = new Entry();
+                        // This object will use the ChoosingRandomPrompts method to randomly select a prompt.
+                        prompts.ChoosingRandomPrompts();
+                        // The prompts object contains the prompt that will be displayed, therefore it should 
+                        //   be stored in the _prompt attribute of the entry object.
+                        entry._prompt = prompts._randomPrompt;
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
 
-                    journal.AddingEntry(entry, prompts);
-                    Console.ReadKey();
-                    break;
-                case 2:
-                    journal.DisplayingAllTheEntries();
-                    Console.ReadKey();
-                    break;
-                case 3:
-                    journal.LoadingFromAFile();
-                    Console.ReadKey();
-                    break;
-                case 4:
-                    journal.SavingToAFile();
-                    Console.ReadKey();
-                    break;
-                case 5:
-                    exit = true;
-                    break;
-                default:
-                    Console.WriteLine("Error!, Please enter an option in the Menu.");
-                    Console.ReadKey();
-                    break;
+                        journal.AddingEntry(entry, prompts);
+                        Console.ReadKey();
+                        break;
+                    case 2:
+                        journal.DisplayingAllTheEntries();
+                        Console.ReadKey();
+                        break;
+                    case 3:
+                        journal.LoadingFromAFile();
+                        Console.ReadKey();
+                        break;
+                    case 4:
+                        journal.SavingToAFile();
+                        Console.ReadKey();
+                        break;
+                    case 5:
+                        exit = true;
+                        break;
+                    default:
+                        Console.WriteLine("Error!, Please enter an option in the Menu.");
+                        Console.ReadKey();
+                        break;
                 }
             }
-            catch(FormatException)
+            catch (FormatException)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("Error! No letters are allowed to be entered in the Menu options.");
