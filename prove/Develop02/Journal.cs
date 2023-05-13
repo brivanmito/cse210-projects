@@ -1,65 +1,126 @@
+// Author: Bryan Miño Toala
+// Brigham Young University Idaho
+// CSE 210 - Programming with Classes 
 using System.IO;
+using Microsoft.VisualBasic.FileIO;
 public class Journal
 {
     // public List<Job> _jobs = new List<Job>();
     public List<Entry> _entries = new List<Entry>();
-    public DateTime _dateAndTime = new DateTime();
     public string _filename;
 
     
     public void AddingEntry(Entry a, PromptGenerator b)
     {
         a._dateAndTime = DateTime.Now;
-        if (a._entry.Contains(","))
+        if (b._lines.Count() > 0)
         {
-            string lineWithComas = $"'{a._entry}'";
-            a._entry = lineWithComas;
+            a._entry = Console.ReadLine();
+
+            if (a._entry.Length > 0)
+            {
+                if (a._entry.Contains(","))
+                {
+                    a._entry = $"\"{a._entry}\"";
+                }
+                _entries.Add(a);
+                b.EliminateDuplicatedPrompts();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Info: Entry added!, ");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Info: The entry is empty so it was not entered.");
+            }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Press Enter....");
+
         }
         
-        _entries.Add(a);
-        Console.WriteLine("Entry added!");
     }
     public void DisplayingAllTheEntries()
     {
-        foreach (Entry entry in _entries)
+        if (_entries.Count() > 0)
         {
-            entry.Display();
+            Console.Clear();
+            foreach (Entry entry in _entries)
+            {
+                entry.Display();
+            }
         }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Info: No entries to display");
+        }
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Press Enter....");
     }
     public void SavingToAFile()
     {
-        Console.WriteLine("What is the filename?");
-        _filename = Console.ReadLine();
-        using (StreamWriter outputFile = new StreamWriter(_filename))
+        // If there are no entries, nothing should be saved. Therefore, 
+        //  if the _entries list is empty, it will display a message that it 
+        //  cannot save to the file because the list is empty.
+        if (_entries.Count() > 0)
         {
-            Console.WriteLine($"\nSaving entries in the file.....\n");
-            foreach (Entry entry in _entries)
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("What is the filename?");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            _filename = Console.ReadLine();
+            using (StreamWriter outputFile = new StreamWriter(_filename))
             {
-                outputFile.WriteLine($"{entry._dateAndTime},{entry._prompt},{entry._entry}");
+                Console.WriteLine($"\nSaving entries in the file.....\n");
+                foreach (Entry entry in _entries)
+                {
+                    outputFile.WriteLine($"{entry._dateAndTime},{entry._prompt},{entry._entry}");
+                }
             }
         }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Info: No entries to save");
+        }
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Press Enter....");
     }
     public void LoadingFromAFile()
     {
         //the Journal display method could iterate through all Entry objects and call the Entry display method.
         Console.WriteLine("What is the filename?");
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
         _filename = Console.ReadLine();
-
-        string[] lines = System.IO.File.ReadAllLines(_filename);
-        Console.WriteLine($"\nReading the file....\n");
-        foreach (string line in lines)
+        // Handling Errors: FileNotFoundException
+        try
         {
-            string[] parts = line.Split(",");
-            Entry entry = new Entry();
-            entry._dateAndTime = DateTime.Parse(parts[0]);
-            entry._prompt = parts[1];
-            entry._entry = parts[2];
+            List<string[]> lines = new List<string[]>();
+            using (TextFieldParser parser = new TextFieldParser(_filename)) 
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(",", "\t");
 
-            Console.WriteLine($"Date: {entry._dateAndTime} - Prompt: {entry._prompt}\n{entry._entry}");
-
+                while (!parser.EndOfData) {
+                    string[] row = parser.ReadFields();
+                    lines.Add(row);
+                }
+            }
+            foreach (string[] row in lines)
+            {
+                Entry entry = new Entry();
+                entry._dateAndTime = DateTime.Parse(row[0]);
+                entry._prompt = row[1];
+                entry._entry = row[2];
+                entry.Display();
+            }
         }
-        Console.Write("Press Enter....");
+        catch (FileNotFoundException)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write($"Info: {_filename} file name does not exist, ");
+        }
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write("\nPress Enter....");
     }
 }
