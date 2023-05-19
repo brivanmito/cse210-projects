@@ -4,12 +4,11 @@
 using System.IO;
 using Microsoft.VisualBasic.FileIO;
 public class Journal
-{
-    // public List<Job> _jobs = new List<Job>();
+{   // Atributes
     public List<Entry> _entries = new List<Entry>();
     public string _filename;
 
-
+    // Methods
     public void AddingEntry(Entry a, PromptGenerator b)
     {
         a._dateAndTime = DateTime.Now;

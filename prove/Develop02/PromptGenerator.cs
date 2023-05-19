@@ -7,7 +7,7 @@ public class PromptGenerator
     public string[] _lines;
     public int _randPosition;
     public string _randomPrompt;
-
+    //This method reads all the lines of the file where the prompts are stored.
     public void LoadingPrompts()
     {
         _lines = System.IO.File.ReadAllLines(_filename);
@@ -22,20 +22,17 @@ public class PromptGenerator
             _randomPrompt = _lines[_randPosition];
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(_randomPrompt);
-
-            // List<string> prompts_used = new List<string>(_lines);
-            // prompts_used.RemoveAt(randPosition);
-            // _lines = prompts_used.ToArray();
-            // Console.WriteLine(_randomPrompt);
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("All the prompts were displayed");
-
         }
     }
-
+    //This method adjusts the size of the vector, 
+    // making it smaller on each call, eliminating 
+    // prompts that have already been entered into 
+    // the file, so they will not be displayed repeatedly.
     public void EliminateDuplicatedPrompts()
     {
         string last_prompt = _lines[_lines.Count() - 1];
