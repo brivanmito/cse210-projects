@@ -81,6 +81,7 @@ class Program
                         Console.ReadKey();
                         break;
                     case 4:
+
                         journal.SavingToAFile();
                         Console.ReadKey();
                         break;

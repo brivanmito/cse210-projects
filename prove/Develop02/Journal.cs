@@ -83,7 +83,6 @@ public class Journal
             Console.WriteLine("Info: No entries to save");
         }
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.Write("Press Enter....");
     }
     public void LoadingFromAFile()
     {
@@ -106,14 +105,19 @@ public class Journal
                     lines.Add(row);
                 }
             }
+            //Create a new List, deleting all existing entries.
+            _entries = new List<Entry>();
             foreach (string[] row in lines)
             {
+                // Create a new entry Object
                 Entry entry = new Entry();
                 entry._dateAndTime = DateTime.Parse(row[0]);
                 entry._prompt = row[1];
                 entry._entry = row[2];
-                entry.Display();
+                // Saves this object in a list of objects of type Entry.
+                _entries.Add(entry);
             }
+            Console.WriteLine($"The entries were loaded from {_filename}. In option 2 of the menu you can view them.");
         }
         catch (FileNotFoundException)
         {
