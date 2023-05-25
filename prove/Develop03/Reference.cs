@@ -24,13 +24,20 @@ public class Reference
     }
     public string GetReference()
     {
-        if(_verseNumber.Count() == 2)
+        string reference = $"{_book} {_chapter}:";
+        foreach(int verse in _verseNumber)
         {
-            return $"{_book} {_chapter}:{_verseNumber[0]}-{_verseNumber[1]}. ";
+            reference += verse.ToString();
         }
-        else
-        {
-            return $"{_book} {_chapter}:{_verseNumber[0]}. ";
-        }
+        reference += ". ";
+        return reference;
+        // if(_verseNumber.Count() == 2)
+        // {
+        //     return $"{_book} {_chapter}:{_verseNumber[0]}-{_verseNumber[1]}. ";
+        // }
+        // else
+        // {
+        //     return $"{_book} {_chapter}:{_verseNumber[0]}. ";
+        // }
     }
 }

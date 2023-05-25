@@ -6,18 +6,21 @@
 public class Scripture
 {
     private Reference _reference;
-    private List<Word> _words = new List<Word>();
+    private List<Word> _contentWordByWord = new List<Word>();
     
     public Scripture()
     {
-        // We choose a random Scripture
+        // We choose a random Scripture from a File
         Random r = new Random();
         string[] _linesOfScriptures = System.IO.File.ReadAllLines("scriptures.txt");
         int randomNumber = r.Next(0, _linesOfScriptures.Count()-1);
+        // Choose a random scripture of the File
         string line = _linesOfScriptures[randomNumber];
+        // Split the variable line in reference and verses with the Caracter #
         string[] vector = line.Split('#');
-        string reference = vector[0].ToString().Trim();
-        string[] verses = vector[1].Split('$');
+        // S
+        string reference = vector[0].Trim();
+        string[] verses = vector[1].Trim().Split('$');
 
         LoadBookChapterAndVerse(reference);
         LoadWordsList(verses);
@@ -49,28 +52,28 @@ public class Scripture
             foreach(string singleWord in words)
             {
                 Word word = new Word(singleWord.Trim());
-                _words.Add(word);
+                _contentWordByWord.Add(word);
             }
         }
     }
     public void HideWords()
     {
         Random r = new Random();
-        int optionIndex = r.Next(_words.Count());
+        int optionIndex = r.Next(_contentWordByWord.Count());
         int times = 1;
         while(times <= 3 & IsCompletelyHidden() == false)
         {
-            if (_words[optionIndex].IsHidden())
+            if (_contentWordByWord[optionIndex].IsHidden())
             {
-                while(_words[optionIndex].IsHidden() == true)
+                while(_contentWordByWord[optionIndex].IsHidden() == true)
                 {
-                    optionIndex = r.Next(_words.Count());
+                    optionIndex = r.Next(_contentWordByWord.Count());
                 }
-                _words[optionIndex].Hide();
+                _contentWordByWord[optionIndex].Hide();
             }
             else
             {
-                _words[optionIndex].Hide();
+                _contentWordByWord[optionIndex].Hide();
             }
             times++;
         }
@@ -80,7 +83,7 @@ public class Scripture
     {
         Console.Write(_reference.GetReference());
         string renderedText = "";
-        foreach (Word word in _words)
+        foreach (Word word in _contentWordByWord)
         {
             renderedText += word.GetRenderedText() + " ";
         }
@@ -89,7 +92,7 @@ public class Scripture
     }
     public bool IsCompletelyHidden()
     {
-        foreach (Word word in _words)
+        foreach (Word word in _contentWordByWord)
         {
             if (!word.IsHidden())
             {
