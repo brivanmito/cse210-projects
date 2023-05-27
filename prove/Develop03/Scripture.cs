@@ -17,21 +17,24 @@ public class Scripture
         // Choose a random scripture of the File
         string line = _linesOfScriptures[randomNumber];
         // Split the variable line in reference and verses with the Caracter #
-        string[] vector = line.Split('#');
-        // S
-        string reference = vector[0].Trim();
-        string[] verses = vector[1].Trim().Split('$');
-
+        // Example: Jeremiah 17:7 # Blessed is the man that trusteth in the Lord, and whose hope the Lord is.
+        string[] vector = line.Split('#'); // vector = ["Jeremiah 17:7","Blessed is the man that trusteth in the Lord, and whose hope the Lord is"]
+        // Save in the respective variable the Reference and Verses
+        string reference = vector[0].Trim(); // vector[0] = "Jeremiah 17:7"
+        // vector[1] = "Blessed is the man that trusteth in the Lord, and whose hope the Lord is"
+        string[] verses = vector[1].Trim().Split('$'); // verses = ["Blessed", "is", "the", "man", .....]
+        // Call to the function LoadBookChapterAndVerse to create a object of the class Reference sending the variable reference
         LoadBookChapterAndVerse(reference);
         LoadWordsList(verses);
     }
     private void LoadBookChapterAndVerse(string reference)
     {
-        string[] line = reference.Split(' '); //['Proverbs', '4:5-6']
-        string book = line[0].Trim(); // book = Proverbs
-        string[] line2 = line[1].Split(':'); // ['4', '5-6']
-        int chapter = int.Parse(line2[0].Trim()); // chapter = 4
-        if (line2[1].Contains("-")) 
+        // reference = "Jeremiah 17:7"
+        string[] line = reference.Split(' '); // line = ["Jeremiah", "17:7"]
+        string book = line[0].Trim(); // book = "Jeremiah"
+        string[] line2 = line[1].Split(':'); // ['17', '7']
+        int chapter = int.Parse(line2[0].Trim()); // chapter = 17
+        if (line2[1].Contains("-")) // line2[1] = 17 -> No contain the caracther "-"
         {
             line = line2[1].Split('-');
             int start = int.Parse(line[0]);
@@ -40,6 +43,7 @@ public class Scripture
         }
         else
         {
+            
             int start = int.Parse(line2[1]);
             _reference = new Reference(start, book, chapter);
         }
@@ -59,33 +63,35 @@ public class Scripture
     public void HideWords()
     {
         Random r = new Random();
-        int optionIndex = r.Next(_contentWordByWord.Count());
+
+        int randomWordIndex = r.Next(_contentWordByWord.Count());
         int times = 1;
+        // In this loop I hide the 3 words each time the users press "Enter"
         while(times <= 3 & IsCompletelyHidden() == false)
         {
-            if (_contentWordByWord[optionIndex].IsHidden())
+            if (_contentWordByWord[randomWordIndex].IsHidden())
             {
-                while(_contentWordByWord[optionIndex].IsHidden() == true)
+                while(_contentWordByWord[randomWordIndex].IsHidden() == true)
                 {
-                    optionIndex = r.Next(_contentWordByWord.Count());
+                    randomWordIndex = r.Next(_contentWordByWord.Count());
                 }
-                _contentWordByWord[optionIndex].Hide();
+                _contentWordByWord[randomWordIndex].Hide();
             }
             else
             {
-                _contentWordByWord[optionIndex].Hide();
+                _contentWordByWord[randomWordIndex].Hide();
             }
             times++;
         }
         
     }
-    public string GetRenderedText()
+    public string GetScripture()
     {
         Console.Write(_reference.GetReference());
         string renderedText = "";
         foreach (Word word in _contentWordByWord)
         {
-            renderedText += word.GetRenderedText() + " ";
+            renderedText += word.GetRenderedWord() + " ";
         }
         return renderedText.Trim();
 

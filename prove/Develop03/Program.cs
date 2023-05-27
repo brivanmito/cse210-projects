@@ -8,30 +8,22 @@ class Program
     static void Main(string[] args)
     {
         Scripture scripture = new Scripture();
-        // Mostrar el texto original
         Console.Clear();
-        Console.WriteLine(scripture.GetRenderedText());
-
         string option = "";
-
-        while(scripture.IsCompletelyHidden() != true)
+        Console.WriteLine(scripture.GetScripture());
+        Console.WriteLine("\nPress Enter to continue or type 'quit' to finish\n");
+        
+        do
         {
-            // Esperar que el usuario presione Enter para ocultar una palabra
-            Console.WriteLine("\nPress Enter to continue or type 'quit' to finish");
-            option = Console.ReadLine().ToLower();
+            option = Console.ReadLine();
             if(option != "quit")
             {
                 Console.Clear();
-                // Ocultar una palabra del Scripture
                 scripture.HideWords();
-                // Mostrar el texto actualizado
-                Console.WriteLine(scripture.GetRenderedText());
+                Console.WriteLine(scripture.GetScripture());
+                Console.WriteLine("\nPress Enter to continue or type 'quit' to finish\n");
             }
-            else
-            {
-                break;
-            }
-        }
+        }while(option != "quit" & scripture.IsCompletelyHidden() != true);
         
     }
 }

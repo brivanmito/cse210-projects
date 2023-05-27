@@ -24,7 +24,7 @@ public class Word
     {
         return _isHidden;
     }
-    public string GetRenderedText()
+    public string GetRenderedWord()
     {
         if(_isHidden)
         {
