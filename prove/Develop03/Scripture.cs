@@ -8,26 +8,16 @@ public class Scripture
     private Reference _reference;
     private List<Word> _contentWordByWord = new List<Word>();
     
-    public Scripture()
+    public Scripture(string reference, string verses)
     {
-        // We choose a random Scripture from a File
-        Random r = new Random();
-        string[] _linesOfScriptures = System.IO.File.ReadAllLines("scriptures.txt");
-        int randomNumber = r.Next(0, _linesOfScriptures.Count()-1);
-        // Choose a random scripture of the File
-        string line = _linesOfScriptures[randomNumber];
-        // Split the variable line in reference and verses with the Caracter #
-        // Example: Jeremiah 17:7 # Blessed is the man that trusteth in the Lord, and whose hope the Lord is.
-        string[] vector = line.Split('#'); // vector = ["Jeremiah 17:7","Blessed is the man that trusteth in the Lord, and whose hope the Lord is"]
-        // Save in the respective variable the Reference and Verses
-        string reference = vector[0].Trim(); // vector[0] = "Jeremiah 17:7"
-        // vector[1] = "Blessed is the man that trusteth in the Lord, and whose hope the Lord is"
-        string[] verses = vector[1].Trim().Split('$'); // verses = ["Blessed", "is", "the", "man", .....]
-        // Call to the function LoadBookChapterAndVerse to create a object of the class Reference sending the variable reference
-        LoadBookChapterAndVerse(reference);
-        LoadWordsList(verses);
+        string[] versesSplited = verses.Split(' ');
+
+        ObtainBookChapterAndVerse(reference);
+        LoadWordsList(versesSplited); // verses = ["Blessed", "is", "the", "man", .....]
     }
-    private void LoadBookChapterAndVerse(string reference)
+
+    // Special method to obtain the name of a book, chapter, and verses/verses
+    private void ObtainBookChapterAndVerse(string reference)
     {
         // reference = "Jeremiah 17:7"
         string[] line = reference.Split(' '); // line = ["Jeremiah", "17:7"]
@@ -66,8 +56,8 @@ public class Scripture
 
         int randomWordIndex = r.Next(_contentWordByWord.Count());
         int times = 1;
-        // In this loop I hide the 3 words each time the users press "Enter"
-        while(times <= 3 & IsCompletelyHidden() == false)
+        // In this loop I hide 3 words each time the users press "Enter"
+        while(times <= 3 & IsTheScriptureCompletelyHidden() == false)
         {
             if (_contentWordByWord[randomWordIndex].IsHidden())
             {
@@ -89,6 +79,7 @@ public class Scripture
     {
         Console.Write(_reference.GetReference());
         string renderedText = "";
+        Console.ForegroundColor = ConsoleColor.White;
         foreach (Word word in _contentWordByWord)
         {
             renderedText += word.GetRenderedWord() + " ";
@@ -96,7 +87,7 @@ public class Scripture
         return renderedText.Trim();
 
     }
-    public bool IsCompletelyHidden()
+    public bool IsTheScriptureCompletelyHidden()
     {
         foreach (Word word in _contentWordByWord)
         {

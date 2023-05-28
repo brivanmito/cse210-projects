@@ -24,6 +24,7 @@ public class Reference
     }
     public string GetReference()
     {
+        Console.ForegroundColor = ConsoleColor.Yellow;
         if(_verseNumber.Count() > 1)
         {
             return $"{_book} {_chapter}:{_verseNumber[0]}-{_verseNumber[1]}. ";
