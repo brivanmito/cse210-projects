@@ -11,7 +11,7 @@ class Program
         //    - Avoid duplicating code in classes where it could instead be placed in a base class.
         //    - Follow the principles of encapsulation and abstraction by having private member variables and putting related items in the same class.
         // Exceeding Requirements
-        //    - Adding another kind of activity. This kind of activity is to do exercise.
+        //    - Adding another kind of activity. This kind of activity is to do exercise. I create the class ExerciseActivity, this activity shows a countdown.
         //    - Make sure no random prompts/questions are selected until they have all been used at least once in that session. Aseguro que mi programa tengan preguntas random y prompts diferentes por cada sesion iniciada.
         int option = 0;
         bool bucle = true;
