@@ -40,7 +40,6 @@ public class Activity
             Console.Write("\b \b");
 
         }
-        Console.Clear();
     }
     public void CountDown(int start)
     {
@@ -49,10 +48,16 @@ public class Activity
         {
             Console.Write(i);
             Thread.Sleep(1000);
-            Console.Write("\b  \b");
+            if (i < 10)
+            {
+                Console.Write("\b \b");
+            }
+            else
+            {
+                Console.Write("\b\b  \b\b");
+            }
 
         }
-        Console.Clear();
     }
 
     protected void SetStartActivity()

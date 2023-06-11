@@ -8,19 +8,19 @@ public class ExcerciseActivity : Activity
     {
         _listExcercise = new List<string>
         {
-            "Leg Raises",
-            "Ankle Rotations",
-            "Leg Extensions",
-            "Neck Stretches",
-            "Hand Openings and Closings"
+            "Neck stretches",
+            "Back Stretches",
+            "Shoulder rotation",
+            "Abdominal contraction exercise",
+            "Gluteal contraction exercise"
         };
         _Listdescription = new List<string>
         {
-            "Sit on a chair with your feet flat on the floor. Lift one leg straight up and then lower it back down slowly. Repeat the movement with the other leg. This helps strengthen the leg muscles.",
-            "Sit with your feet flat on the floor. Rotate your ankles in a clockwise direction and then in a counterclockwise direction. This exercise helps improve ankle mobility and circulation.",
-            "Sit on a chair with your feet flat on the floor. Then, extend one leg forward and lift it as high as possible without lifting the heel off the floor. Hold the position for a few seconds and then lower it back down. Repeat with the other leg. This exercise works the leg muscles and helps improve flexibility.",
-            "Sit in an upright position. Tilt your head to one side, bringing your ear towards your shoulder, and hold the position for a few seconds. Then, repeat the stretch on the other side. You can also do gentle neck rotations to the right and left.",
-            "Sit with your hands resting on your thighs. Open your hands as wide as possible and then close them tightly. Repeat this movement several times to work the hand muscles and improve circulation."
+            "Slowly turn your head to one side, hold the position for a few seconds and then turn it to the other side. Repeat the movement several times to relieve tension in the neck and shoulders.",
+            "Sit on the edge of your chair and slowly rotate your torso to one side, holding the back of the chair for stability. Hold the position for a few seconds and then repeat on the other side. This helps relieve stiffness and tension in the back.",
+            "Sit upright in your chair and place your hands on your shoulders. Make forward circular motions with your shoulders, then switch and make backward circular motions. This helps release tension in the shoulders and neck.",
+            "Sit in your chair with your back straight. Then, contract your abdominal muscles and hold the contraction for 10 seconds. Relax and repeat several times. This exercise helps strengthen your abdominal muscles.",
+            "Sit in your chair and squeeze your gluteal muscles. Hold the contraction for 10 seconds and then relax. Repeat several times to strengthen your gluteal muscles."
         };
         
 
@@ -37,13 +37,21 @@ public class ExcerciseActivity : Activity
         Console.Clear();
         Console.WriteLine("Get Ready...");
         base.ShowSpinner();
-        Console.WriteLine(_listExcercise[_randomPos] + "\n");
-        Console.WriteLine(_Listdescription[_randomPos] + "\n");
+        ObtainPrompt();
+        DisplayExercise();
+        Console.ReadKey();
         base.SetStartActivity();
         while (base.VerifyTime(base.GetStartActivity())) // loop until the time set by user has elapsed
         {
             base.CountDown(base.GetDuration());
         }
         base.DisplayEndingMessage();
+    }
+    protected void DisplayExercise()
+    {
+        Console.WriteLine("Prepare for the following exercise:\n");
+        Console.WriteLine($"--- {_listExcercise[_randomPos]} ---\n");
+        Console.WriteLine(_Listdescription[_randomPos] + "\n");
+        Console.Write("When you be prepared, press ENTER to Continue. \n");
     }
 }

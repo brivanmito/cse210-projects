@@ -4,6 +4,15 @@ class Program
 {
     static void Main(string[] args)
     {
+        // Comments
+        //     In the Listing Activity I use the method you showed DeltaTime, this makes it possible to check at all times when the elapsed time has elapsed.
+        // Core Requirements
+        //    - Use inheritance by having a separate class for each kind of activity with a base class to contain any shared attributes or behaviors.
+        //    - Avoid duplicating code in classes where it could instead be placed in a base class.
+        //    - Follow the principles of encapsulation and abstraction by having private member variables and putting related items in the same class.
+        // Exceeding Requirements
+        //    - Adding another kind of activity. This kind of activity is to do exercise.
+        //    - Make sure no random prompts/questions are selected until they have all been used at least once in that session. Aseguro que mi programa tengan preguntas random y prompts diferentes por cada sesion iniciada.
         int option = 0;
         bool bucle = true;
 
@@ -46,7 +55,7 @@ class Program
                     break;
                 case 4:
                     nameActivity = "Exercise Activity";
-                    descriptionActivity = "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.";
+                    descriptionActivity = "This activity will help you exercise on the good things in your life by having you list as many things as you can in a certain area.";
                     ExcerciseActivity exerciseActivity = new ExcerciseActivity(nameActivity, descriptionActivity);
                     exerciseActivity.RunActivity();
                     break;
