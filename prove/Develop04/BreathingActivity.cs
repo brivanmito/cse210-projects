@@ -1,7 +1,7 @@
 public class BreathingActivity : Activity
 {
     private List<string>_messages;
-    public BreathingActivity(string name, string description, int delay) : base(name, description, delay)
+    public BreathingActivity(string name, string description) : base(name, description)
     {
         _messages = new List<string>
         {
@@ -13,9 +13,11 @@ public class BreathingActivity : Activity
     {
         base.DisplayingStartingMessage();
         base.SetDuration();
-        base.PauseCountDownTimer();
+        Console.Clear();
+        Console.WriteLine("Get Ready...");
+        base.ShowSpinner();
         base.SetStartActivity();
-        while (!base.VerifyTime(base.GetStartActivity())) // loop until the time set by user has elapsed
+        while (base.VerifyTime(base.GetStartActivity())) // loop until the time set by user has elapsed
         {
             BreathIn();
             Console.WriteLine("");
@@ -23,25 +25,27 @@ public class BreathingActivity : Activity
             Console.WriteLine("\n");
         }
         base.DisplayEndingMessage();
-        base.PauseSpinner();
 
     }
     private void BreathIn()
     {
+        Console.Write($"{_messages[0]} ");
         for (int i = 5; i > 0; i--) // loop to print a countdown to the terminal - 5 seconds
         {
-            Console.Write($"{_messages[0]} {i}");
+            // 12 + 1 + 1   Breath In... 1
+            Console.Write(i);
             Thread.Sleep(1000);
-            Console.Write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"); // backspaces to clear the line then reprints in the same space
+            Console.Write("\b \b"); 
         }
     }
     private void BreathOut()
     {
-        for (int i = 6; i > 0; i--) // loop to print a countdown to the terminal - 6 seconds
+        Console.Write($"{_messages[1]} ");
+        for (int i = 6; i > 0; i--) 
         {
-            Console.Write($"{_messages[1]} {i}");
+            Console.Write(i);
             Thread.Sleep(1000);
-            Console.Write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"); // backspaces to clear the line then reprints in the same space
+            Console.Write("\b \b"); 
         }
     }
 }

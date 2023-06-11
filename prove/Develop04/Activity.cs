@@ -1,16 +1,21 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
+
 public class Activity
 {
     private string _nameActivity;
     private string _descriptionActivity;
     private int _durationActivity;
-    private int _delaySeconds;
     private DateTime _startingActivity;
 
-    public Activity(string name, string description, int delay)
+    
+
+    public Activity(string name, string description)
     {
         _nameActivity = name;
         _descriptionActivity = description;
-        _delaySeconds = delay;
     }
 
     protected void DisplayingStartingMessage()
@@ -21,20 +26,23 @@ public class Activity
     protected void DisplayEndingMessage()
     {
         Console.WriteLine("\nWell Done!!");
-        PauseSpinner();
+        ShowSpinner();
         Console.WriteLine($"\nYou have completed another {_durationActivity} seconds of the {_nameActivity}");
+        ShowSpinner();
     }
-    protected void PauseCountDownTimer()
+    public void CountDown()
     {
-        Console.Clear();
-        for(int i = _delaySeconds; i > 0; i--)
+        Console.Write("You may begin in: ");
+        for (int i = 5; i > 0; i--)
         {
-            Console.Write($"Get Ready! {i}");
+            Console.Write(i);
             Thread.Sleep(1000);
-            Console.Write("\b\b\b\b\b\b\b\b\b\b\b\b\b");
+            Console.Write("\b \b");
+
         }
-        Console.WriteLine("\n");
+        Console.Clear();
     }
+
     protected void SetStartActivity()
     {
         _startingActivity = DateTime.Now;
@@ -43,34 +51,70 @@ public class Activity
     {
         return _startingActivity;
     }
-    protected void PauseSpinner()
+    protected void ShowSpinner()
     {
+        int bucle = 0;
         List<string> caracthers = new List<string>()
         {
             "|","/","-","\\"
         };
-        for(int i = 0; i < caracthers.Count(); i++)
+        for(int i = 0; bucle < caracthers.Count() * 3; i++)
         {
+            if(i == caracthers.Count())
+            {
+                i = 0;
+            }
             Console.Write(caracthers[i]);
             Thread.Sleep(250);
             Console.Write("\b \b");
+            bucle++;
+            
         }
+        Console.WriteLine("");
+    }
+    protected void ShowSpinner(int t)
+    {
+        int bucle = 0;
+        List<string> caracthers = new List<string>()
+        {
+            "|","/","-","\\"
+        };
+        for(int i = 0; bucle < caracthers.Count() * t; i++)
+        {
+            if(i == caracthers.Count())
+            {
+                i = 0;
+            }
+            Console.Write(caracthers[i]);
+            Thread.Sleep(250);
+            Console.Write("\b \b");
+            bucle++;
+            
+        }
+        Console.WriteLine("");
     }
     protected void SetDuration()
     {
-        Console.Write("How long, in seconds, would you like fpr your session? ");
+        Console.Write("How long, in seconds, would you like for your session?  ");
         int seconds = int.Parse(Console.ReadLine());
         _durationActivity = seconds;
     }
-    
+    protected int GetDuration()
+    {
+        return _durationActivity;
+    }
     protected bool VerifyTime(DateTime start)
     {
-        DateTime endTime = start.AddSeconds(_durationActivity);
+        // now = 06:44:02
         DateTime now = DateTime.Now;
+        // start = 06:44:00
+        DateTime endTime = start.AddSeconds(_durationActivity);
+        //endtime = 06:44:30
         if(now > endTime)
         {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
+    
 }

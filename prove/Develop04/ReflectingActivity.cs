@@ -3,7 +3,7 @@ public class ReflectingActivity : Activity
     private List<string> _prompts;
     private List<string> _questions;
     private List<int> _usedQuestions = new List<int>();
-    public ReflectingActivity(string name, string description, int delay) : base(name, description, delay)
+    public ReflectingActivity(string name, string description) : base(name, description)
     {
         _prompts = new List<string> 
         { 
@@ -34,31 +34,47 @@ public class ReflectingActivity : Activity
     public string GetRandomQuestion()
     {
         Random rand = new Random();
-        string question = _questions[rand.Next(_questions.Count)];
+        int randomNumber = rand.Next(_questions.Count);
+        while(_usedQuestions.Contains(randomNumber))
+        {
+            randomNumber = rand.Next(_questions.Count);
+        }
+        string question = _questions[randomNumber];
+        _usedQuestions.Add(randomNumber);
         return question;
     }
     private void DisplayPrompt()
     {
-        Console.WriteLine(GetRandomPrompt());
+        Console.WriteLine("Consider the following prompt:\n");
+        Console.WriteLine($"--- {GetRandomPrompt()} ---\n");
+        Console.WriteLine("When you have something in mind, press ENTER to Continue.");
     }
     public void RunActivity()
     {
         base.DisplayingStartingMessage();
         base.SetDuration();
-        base.PauseCountDownTimer();
+        Console.Clear();
+        Console.WriteLine("Get ready ...");
+        base.ShowSpinner();
         DisplayPrompt();
+        Console.ReadKey();
+        Console.WriteLine("\nNow ponder on each of the following questions as they related to this experience.");
+        base.CountDown();
         base.SetStartActivity();
-        while (!base.VerifyTime(base.GetStartActivity())) // loop until the time set by user has elapsed
+        while (base.VerifyTime(base.GetStartActivity())) // loop until the time set by user has elapsed
         {
+            if(_usedQuestions.Count() == _questions.Count())
+            {
+                Console.WriteLine("All the prompts were displayed");
+                break;
+            }
             DisplayQuestions();
-            
-            base.PauseSpinner();
+            base.ShowSpinner(10);
         }
         base.DisplayEndingMessage();
-        base.PauseSpinner();
     }
     public void DisplayQuestions()
     {
-        Console.WriteLine(GetRandomQuestion());
+        Console.Write($"> {GetRandomQuestion()}");
     }
 }
