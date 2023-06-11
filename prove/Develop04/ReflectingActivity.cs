@@ -1,11 +1,11 @@
 public class ReflectingActivity : Activity
 {
-    private List<string> _prompts;
+    private string reflectingPrompt;
     private List<string> _questions;
     private List<int> _usedQuestions = new List<int>();
     public ReflectingActivity(string name, string description) : base(name, description)
     {
-        _prompts = new List<string> 
+        List<string> prompts = new List<string> 
         { 
             "Think of a time when you stood up for someone else.", 
             "Think of a time when you did something really difficult.", 
@@ -24,12 +24,11 @@ public class ReflectingActivity : Activity
             "What did you learn about yourself through this experience?", 
             "How can you keep this experience in mind in the future?" 
         };
+        base.SetListPrompts(prompts);
     }
-    public string GetRandomPrompt()
+    private void GetReflectinPrompt()
     {
-        Random rand = new Random();
-        string prompt = _prompts[rand.Next(_prompts.Count)];
-        return prompt;
+        reflectingPrompt = base.GetRandomPrompt();
     }
     public string GetRandomQuestion()
     {
@@ -46,7 +45,8 @@ public class ReflectingActivity : Activity
     private void DisplayPrompt()
     {
         Console.WriteLine("Consider the following prompt:\n");
-        Console.WriteLine($"--- {GetRandomPrompt()} ---\n");
+        GetReflectinPrompt();
+        Console.WriteLine($"--- {reflectingPrompt} ---\n");
         Console.WriteLine("When you have something in mind, press ENTER to Continue.");
     }
     public void RunActivity()
@@ -60,6 +60,7 @@ public class ReflectingActivity : Activity
         Console.ReadKey();
         Console.WriteLine("\nNow ponder on each of the following questions as they related to this experience.");
         base.CountDown();
+        Console.Clear();
         base.SetStartActivity();
         while (base.VerifyTime(base.GetStartActivity())) // loop until the time set by user has elapsed
         {
@@ -75,6 +76,6 @@ public class ReflectingActivity : Activity
     }
     public void DisplayQuestions()
     {
-        Console.Write($"> {GetRandomQuestion()}");
+        Console.Write($"\n> {GetRandomQuestion()} ");
     }
 }

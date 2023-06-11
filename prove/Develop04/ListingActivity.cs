@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 public class ListingActivity : Activity
 {
-    private string[] _prompts;
+    private string listingPrompt;
     private List<string> _usedPrompts = new List<string>();
     private List<string> _userList = new List<string>();
 
@@ -11,20 +11,25 @@ public class ListingActivity : Activity
     private double lastFrame;
     public ListingActivity(string name, string description) : base(name, description)
     {
-        _prompts = new string[] {"Who are people that you appreciate?","What are personal strengths of yours?","Who are people that you have helped this week?","When have you felt the Holy Ghost this month?","Who are some of your personal heroes?"};
+        List<string> prompt = new List<string>
+        {
+            "Who are people that you appreciate?",
+            "What are personal strengths of yours?",
+            "Who are people that you have helped this week?",
+            "When have you felt the Holy Ghost this month?",
+            "Who are some of your personal heroes?"
+        };
+        SetListPrompts(prompt);
     }
-    private string GetRandomPrompt()
+    private void GetListingPrompt()
     {
-        Random rand = new Random();
-        string prompt = _prompts[rand.Next(_prompts.Count())];
-        _usedPrompts.Add(prompt);
-        return prompt;
+        listingPrompt = base.GetRandomPrompt();
     }
     public void DisplayPrompt()
     {
         Console.WriteLine("List as many responses you can to the following prompt: \n");
-        string prompt = GetRandomPrompt();
-        Console.WriteLine($"--- {prompt} ---\n");
+        GetListingPrompt();
+        Console.WriteLine($"--- {listingPrompt} ---\n");
 
     }
     public void RunActivity()
@@ -40,47 +45,7 @@ public class ListingActivity : Activity
         GetEntries(base.GetDuration());
         base.DisplayEndingMessage();
     }
-    // public double GetEntries(int durationInt)
-    // {
-    //     Stopwatch sw = new Stopwatch();
-    //     sw.Start();
-    //     dt = DeltaTime();
-    //     double _durationMill = durationInt * 1000;
-    //     double acc = 0.0;
-    //     int total = 0;
-
-    //     Console.Write(">");
-
-    //     //start counting here
-    //     while (acc <= _durationMill)
-    //     {
-    //         acc += base.DeltaTime();
-    //         if (!Console.KeyAvailable)
-    //         {
-    //             continue;
-    //         }
-
-    //         ConsoleKeyInfo key = Console.ReadKey();
-    //         if (key.Key == ConsoleKey.Enter)
-    //         {
-    //             total ++;
-
-    //             Console.WriteLine("");
-    //             Console.Write(">");
-    //         }
-    //         else
-    //         {
-    //             _userList.Add(key.KeyChar.ToString());
-    //         }
-        
-    //     }
-
-    //     Console.WriteLine();
-    //     Console.WriteLine("Time's up!");
-    //     Console.WriteLine($"You listed {total} items.");
-
-    //     return acc;
-    // }
+    
     private double deltaTime()
     {
         TimeSpan ts = this.sw.Elapsed;
@@ -94,7 +59,7 @@ public class ListingActivity : Activity
         this.sw.Start();
         double acc = 0.0;
         List<string> buf = new List<string>();
-        Console.WriteLine("Go!");
+        Console.WriteLine("");
         duration = duration * 1000;
         Console.Write("> ");
         while (acc <= duration)
@@ -121,7 +86,23 @@ public class ListingActivity : Activity
         this.sw.Reset();
         string userListStr = String.Join<string>("", _userList);
         string[] newUserList = userListStr.Split("\n");
-        Console.WriteLine($"\nYou listed {newUserList.Count()} items.");
+        // If the user does not insert any characters, there is no sense in saving an empty string, so it should print 0 elements.
+        // In case he only presses one character, e.g. an "A", it should be saved as 1 element.
+        if(newUserList.Count() == 1)
+        {
+            if(newUserList[0] == "")
+            {
+                Console.WriteLine($"\nYou listed {0} items.");
+            }
+            else
+            {
+                Console.WriteLine($"\nYou listed {newUserList.Count()} items.");
+            }
+        }
+        else
+        {
+            Console.WriteLine($"\nYou listed {newUserList.Count()} items.");
+        }
     }
 
 }

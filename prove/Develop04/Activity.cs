@@ -9,6 +9,7 @@ public class Activity
     private string _descriptionActivity;
     private int _durationActivity;
     private DateTime _startingActivity;
+    private List<string> _prompts;
     
 
     public Activity(string name, string description)
@@ -16,7 +17,17 @@ public class Activity
         _nameActivity = name;
         _descriptionActivity = description;
     }
-    
+
+    protected void SetListPrompts(List<string> prompts)
+    {
+        _prompts = prompts;
+    }
+    protected string GetRandomPrompt()
+    {
+        Random rand = new Random();
+        string prompt = _prompts[rand.Next(_prompts.Count)];
+        return prompt;
+    }
 
     protected void DisplayingStartingMessage()
     {
