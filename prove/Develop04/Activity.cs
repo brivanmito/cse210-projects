@@ -9,7 +9,6 @@ public class Activity
     private string _descriptionActivity;
     private int _durationActivity;
     private DateTime _startingActivity;
-
     
 
     public Activity(string name, string description)
@@ -17,6 +16,7 @@ public class Activity
         _nameActivity = name;
         _descriptionActivity = description;
     }
+    
 
     protected void DisplayingStartingMessage()
     {
@@ -38,6 +38,18 @@ public class Activity
             Console.Write(i);
             Thread.Sleep(1000);
             Console.Write("\b \b");
+
+        }
+        Console.Clear();
+    }
+    public void CountDown(int start)
+    {
+        Console.Write("Timer: ");
+        for (int i = start; i > 0; i--)
+        {
+            Console.Write(i);
+            Thread.Sleep(1000);
+            Console.Write("\b  \b");
 
         }
         Console.Clear();

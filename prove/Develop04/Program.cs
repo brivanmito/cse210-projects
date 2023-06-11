@@ -18,7 +18,8 @@ class Program
             Console.WriteLine("\n    1.- Start Breathing Activity");
             Console.WriteLine("    2.- Start Reflection Activity");
             Console.WriteLine("    3.- Start Listing Activity");
-            Console.WriteLine("    4.- Quit\n");
+            Console.WriteLine("    4.- Start Exercise Activity");
+            Console.WriteLine("    5.- Quit\n");
 
             Console.Write("Select a choice from the menu: ");
             option = int.Parse(Console.ReadLine());
@@ -44,6 +45,12 @@ class Program
                     listingActivity.RunActivity();
                     break;
                 case 4:
+                    nameActivity = "Exercise Activity";
+                    descriptionActivity = "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.";
+                    ExcerciseActivity exerciseActivity = new ExcerciseActivity(nameActivity, descriptionActivity);
+                    exerciseActivity.RunActivity();
+                    break;
+                case 5:
                     bucle = false;
                     break;
                 default:
