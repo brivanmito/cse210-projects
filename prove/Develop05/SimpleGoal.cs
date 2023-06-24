@@ -5,6 +5,10 @@ public class SimpleGoal : Goal
     {
         _checked = check;
     }
+    public override bool GetChecked()
+    {
+        return _checked;
+    }
     protected override void IsComplete()
     {
         _checked = true;

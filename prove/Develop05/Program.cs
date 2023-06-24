@@ -73,10 +73,9 @@ class Program
                         break;
                     case 2:
                         goals.ShowGoals();
-                        Console.ReadKey();
                         break;
                     case 3:
-                        
+                        goals.SaveGoalsInFile();
                         break;
                     case 4:
                         

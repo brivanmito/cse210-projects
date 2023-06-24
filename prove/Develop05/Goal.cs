@@ -2,11 +2,11 @@ public abstract class Goal
 {
     // Esta clase esta encargada de guardar la informacion de cada meta
     //
-    private string _nameGoal;
-    private string _descriptionGoal;
-    private int _pointsPerGoal;
-    private int _pointsEarneds;
-    private List<string> _levels;
+    protected string _nameGoal;
+    protected string _descriptionGoal;
+    protected int _pointsPerGoal;
+    protected int _pointsEarneds;
+    protected List<string> _levels;
 
     public Goal(string name, string description, int points)
     {
@@ -26,7 +26,7 @@ public abstract class Goal
     {
         return _nameGoal;
     }
-    protected string GetDescriptionGoal()
+    public string GetDescriptionGoal()
     {
         return _descriptionGoal;
     }
@@ -42,7 +42,7 @@ public abstract class Goal
     {
         return _pointsEarneds;
     }
-    protected int GetPointsPerGoal()
+    public int GetPointsPerGoal()
     {
         return _pointsPerGoal;
     }
@@ -51,6 +51,26 @@ public abstract class Goal
     protected virtual void IsComplete()
     {
 
+    }
+    public virtual bool GetChecked()
+    {
+        return true;
+    }
+    public virtual int GetBonusPoints()
+    {
+        return 1;
+    }
+    public virtual int GetTargetCount()
+    {
+        return 1;
+    }
+    public virtual int GetCurrentCount()
+    {
+        return 1;
+    }
+    public virtual bool Completed()
+    {
+        return true;
     }
 
 }

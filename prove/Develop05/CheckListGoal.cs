@@ -30,22 +30,42 @@ public class CheckListGoal : Goal
     {
         if(_completed == true)
         {
-            Console.WriteLine($"[X] {base.GetNameGoal()} ({base.GetDescriptionGoal()}) -- {_currentCount}/{_targetCount}");
+            Console.WriteLine($"[X] {base.GetNameGoal()} ({base.GetDescriptionGoal()}) -- Completed {_currentCount}/{_targetCount} times");
         }
         else
         {
-            Console.WriteLine($"[ ] {base.GetNameGoal()} ({base.GetDescriptionGoal()}) -- {_currentCount}/{_targetCount}");
+            Console.WriteLine($"[ ] {base.GetNameGoal()} ({base.GetDescriptionGoal()}) -- Completed {_currentCount}/{_targetCount} times");
         }
 
     }
     public override void RecordEvent()
     {
-        IsComplete();
         if(_completed != true)
         {
+            _currentCount += 1;
+            IsComplete();
             base.SetPoints();
             Console.WriteLine($"Congratulations! You have earned {base.GetPointsPerGoal()}");
         }
-        _currentCount += 1;
+        else
+        {
+            Console.WriteLine($"Congratulations! You have earned {_bonusPoint} bonus for completing the Goal");
+        }
+    }
+    public override int GetBonusPoints()
+    {
+        return _bonusPoint;
+    }
+    public override int GetTargetCount()
+    {
+        return _targetCount;
+    }
+    public override int GetCurrentCount()
+    {
+        return _currentCount;
+    }
+    public override bool Completed()
+    {
+        return _completed;
     }
 }
