@@ -4,7 +4,10 @@ class Program
 {
     static void Main(string[] args)
     {
-        //Console.WriteLine("Hello Develop05 World!");
+        //Exceding Requirements
+            //I decided to load the data from the file, including the points that the user has earned in a game, this allows the persistence of the data so that the user can play again.
+            //I added some joy to the game, I added several levels of play that increases the bonuses according to the amount of total points. Example: Beginner (50 - 60 points) gets an incentive of 10 points, and these will increase according to the level and amount of points.
+
         int option = 0;
         bool bucle = true;
         GoalManager goals = new GoalManager();
