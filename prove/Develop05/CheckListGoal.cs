@@ -10,25 +10,31 @@ public class CheckListGoal : Goal
         _targetCount = targetCount;
         _currentCount = 0;
     }
-    protected override void IsComplete()
+    public CheckListGoal(string name, string description, int points, int bonusPoint, int targetCount, int currentCount, int earnPoints) : base(name, description, points, earnPoints)
     {
-        if(_currentCount == _targetCount)
-        {
-            _completed = true;
-            base.SetBonusPoints(_bonusPoint);
-        }
-        else if (_currentCount < _targetCount)
-        {
-             _completed = false;
-        }
-        else
-        {
-            Console.WriteLine("Goal Already Completed!");
-        }
+        _bonusPoint = bonusPoint;
+        _targetCount = targetCount;
+        _currentCount = currentCount;
     }
+    // protected override void IsComplete()
+    // {
+    //     // if(_currentCount == _targetCount)
+    //     // {
+    //     //     _completed = true;
+    //     //     base.SetBonusPoints(_bonusPoint);
+    //     // }
+    //     // else if (_currentCount < _targetCount)
+    //     // {
+    //     //      _completed = false;
+    //     // }
+    //     // else
+    //     // {
+    //     //     Console.WriteLine("Goal Already Completed!");
+    //     // }
+    // }
     public override void DisplayGoal()
     {
-        if(_completed == true)
+        if(_currentCount == _targetCount)
         {
             Console.WriteLine($"[X] {base.GetNameGoal()} ({base.GetDescriptionGoal()}) -- Completed {_currentCount}/{_targetCount} times");
         }
@@ -40,17 +46,42 @@ public class CheckListGoal : Goal
     }
     public override void RecordEvent()
     {
-        if(_completed != true)
+        // if(_currentCount < _targetCount)
+        // {
+        //     _currentCount += 1;
+        //     base.SetPoints();
+        //     Console.WriteLine($"Congratulations! You have earned {base.GetPointsPerGoal()}");
+        //     _completed = false;
+        //     if(_completed != true)
+        //     {
+        //         _completed = true;
+        //         base.SetBonusPoints(_bonusPoint);
+        //         Console.WriteLine($"Congratulations! You have earned {_bonusPoint} bonus for completing the Goal");
+        //     }
+
+        // }
+        if(!_completed)
         {
             _currentCount += 1;
-            IsComplete();
             base.SetPoints();
             Console.WriteLine($"Congratulations! You have earned {base.GetPointsPerGoal()}");
+            if(_currentCount == _targetCount)
+            {
+                base.SetBonusPoints(_bonusPoint);
+                Console.WriteLine($"Congratulations! You have earned {_bonusPoint} bonus for completing the Goal");
+                _completed = true;
+            }
+
         }
-        else
-        {
-            Console.WriteLine($"Congratulations! You have earned {_bonusPoint} bonus for completing the Goal");
-        }
+        // else if(_currentCount == _targetCount)
+        // {
+        //     if(_completed != true)
+        //     {
+        //         _completed = true;
+        //         base.SetBonusPoints(_bonusPoint);
+        //         Console.WriteLine($"Congratulations! You have earned {_bonusPoint} bonus for completing the Goal");
+        //     }
+        // }
     }
     public override int GetBonusPoints()
     {
@@ -64,8 +95,5 @@ public class CheckListGoal : Goal
     {
         return _currentCount;
     }
-    public override bool Completed()
-    {
-        return _completed;
-    }
+    
 }

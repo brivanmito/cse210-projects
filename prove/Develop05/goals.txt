@@ -1,0 +1,4 @@
+1240
+SimpleGoal,Visit the Hospital,Hospital Quito,100,True,100
+EternalGoal,Read the scriptures,Leer el Libro de Mormon,200,200
+CheckListGoal,Visit the temple,Guayaquil Temple,180,400,3,0,200

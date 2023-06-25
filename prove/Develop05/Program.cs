@@ -78,7 +78,7 @@ class Program
                         goals.SaveGoalsInFile();
                         break;
                     case 4:
-                        
+                        goals.LoadGoalsFromFile();
                         break;
                     case 5:
                         goals.ShowNameGoals();
@@ -94,10 +94,10 @@ class Program
                         break;
                 }
             }
-            catch (FormatException)
+            catch (FormatException e)
             {
                 
-                Console.Write("Error! No letters are allowed to be entered in the Menu options.");
+                Console.Write(e);
                 Console.WriteLine("Press 'Enter'.");
                 Console.ReadKey();
                 Console.Clear();

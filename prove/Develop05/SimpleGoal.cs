@@ -5,6 +5,10 @@ public class SimpleGoal : Goal
     {
         _checked = check;
     }
+    public SimpleGoal(string name, string description, int points, bool check, int earnPoints) : base(name, description, points, earnPoints)
+    {
+        _checked = check;
+    }
     public override bool GetChecked()
     {
         return _checked;

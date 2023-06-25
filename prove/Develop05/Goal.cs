@@ -17,6 +17,16 @@ public abstract class Goal
             "Beginner", "Ninja", "Profesional", "Elite"
         };
     }
+    public Goal(string name, string description, int points, int pointsEarneds)
+    {
+        _nameGoal = name;
+        _descriptionGoal = description;
+        _pointsPerGoal = points;
+        _pointsEarneds = pointsEarneds;
+        _levels = new List<string>{
+            "Beginner", "Ninja", "Profesional", "Elite"
+        };
+    }
     
     // protected virtual void DisplayGoal()
     // {
