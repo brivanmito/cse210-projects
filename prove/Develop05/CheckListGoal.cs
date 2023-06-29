@@ -16,22 +16,7 @@ public class CheckListGoal : Goal
         _targetCount = targetCount;
         _currentCount = currentCount;
     }
-    // protected override void IsComplete()
-    // {
-    //     // if(_currentCount == _targetCount)
-    //     // {
-    //     //     _completed = true;
-    //     //     base.SetBonusPoints(_bonusPoint);
-    //     // }
-    //     // else if (_currentCount < _targetCount)
-    //     // {
-    //     //      _completed = false;
-    //     // }
-    //     // else
-    //     // {
-    //     //     Console.WriteLine("Goal Already Completed!");
-    //     // }
-    // }
+    
     public override void DisplayGoal()
     {
         if(_currentCount == _targetCount)
