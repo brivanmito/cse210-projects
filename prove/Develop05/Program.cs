@@ -15,7 +15,6 @@ class Program
         {
             Console.WriteLine("");
             goals.ShowScore();
-        
             Console.WriteLine("\n    1.- Create New Goal.");
             Console.WriteLine("    2.- List Goals.");
             Console.WriteLine("    3.- Save Goals.");

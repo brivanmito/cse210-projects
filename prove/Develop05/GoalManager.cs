@@ -4,9 +4,55 @@ public class GoalManager
 {
     private List<Goal> _goals;
     private int _totalPoints;
+
+    protected List<string> _levels;
+    protected List<int> _levelsPerPoints;
+
+
     public GoalManager()
     {
         _goals = new List<Goal>();
+
+        _levels = new List<string>{
+            "Beginner", "Ninja", "Profesional", "Elite", "Pro+"
+        };
+        _levelsPerPoints = new List<int>{
+            0, 1000, 5000, 10000, 50000
+        };
+    }
+    public void SetBonusLevels(int number)
+    {
+        _totalPoints += number;
+    }
+    public void AssignLevels()
+    {
+        if(_totalPoints >= _levelsPerPoints[0] & _totalPoints <= _levelsPerPoints[1])
+        {
+            Console.WriteLine($"Level: {_levels[0]}.");
+        }
+        else if(_totalPoints > _levelsPerPoints[1] & _totalPoints <= _levelsPerPoints[2])
+        {
+            Console.WriteLine($"Level: {_levels[1]}.");
+            Console.WriteLine($"You have received 5 points. You will receive 5 additional points as long as you are at {_levels[1]} level.");
+            SetBonusLevels(5);
+            Console.WriteLine($"You now have {_totalPoints} points");
+        }
+        else if(_totalPoints > _levelsPerPoints[2] & _totalPoints <= _levelsPerPoints[3])
+        {
+            Console.WriteLine($"Level: {_levels[2]}.");
+            Console.WriteLine($"You have received 10 points. You will receive 10 additional points as long as you are at {_levels[2]} level.");
+            SetBonusLevels(10);
+            Console.WriteLine($"You now have {_totalPoints} points");
+        }
+        else
+        {
+            Console.WriteLine($"Level: {_levels[3]}.");
+            Console.WriteLine($"You have received 15 points. You will receive 15 additional points as long as you are at {_levels[3]} level.");
+            SetBonusLevels(15);
+            Console.WriteLine($"You now have {_totalPoints} points");
+        }
+        Console.WriteLine("");
+    
     }
     public void RecordEvent(int posGoal)
     {
@@ -51,6 +97,8 @@ public class GoalManager
             _totalPoints += goal.GetEarnedPoints();
         }
         Console.WriteLine($"You have {_totalPoints} points");
+        AssignLevels();
+        
     }
     public void SaveGoal(Goal goal)
     {

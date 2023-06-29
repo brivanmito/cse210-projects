@@ -6,16 +6,12 @@ public abstract class Goal
     protected string _descriptionGoal;
     protected int _pointsPerGoal;
     protected int _pointsEarneds;
-    protected List<string> _levels;
 
     public Goal(string name, string description, int points)
     {
         _nameGoal = name;
         _descriptionGoal = description;
         _pointsPerGoal = points;
-        _levels = new List<string>{
-            "Beginner", "Ninja", "Profesional", "Elite"
-        };
     }
     public Goal(string name, string description, int points, int pointsEarneds)
     {
@@ -23,9 +19,6 @@ public abstract class Goal
         _descriptionGoal = description;
         _pointsPerGoal = points;
         _pointsEarneds = pointsEarneds;
-        _levels = new List<string>{
-            "Beginner", "Ninja", "Profesional", "Elite"
-        };
     }
     
     // protected virtual void DisplayGoal()
