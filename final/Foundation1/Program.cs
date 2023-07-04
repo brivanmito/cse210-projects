@@ -4,6 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        //Create a List of Videos
         List<Video> videos = new List<Video>();
 
         Video FirstVideo = new Video("Baby Shark Dance", "Rovio", 180);
@@ -17,6 +18,8 @@ class Program
         SecondVideo.AddComment("Joseph Murillo", "Works perfectly, thank you!");
         SecondVideo.AddComment("Bryan Josue", "Excellent quality and design!");
         SecondVideo.AddComment("Camila Cabello", "Incredibly useful, highly recommend.");
+        SecondVideo.AddComment("Angelina Jolie", "Amazing video.");
+
 
         Video ThirdVideo = new Video("Air dryer", "Black & Decker", 200);
 
@@ -33,6 +36,9 @@ class Program
         {
             video.DisplayInformation();
         }
+        //Save the List of videos and comments in a file
+        FileHandler file = new FileHandler("videos.txt");
+        file.WriteInFile(videos);
         
     }
 }

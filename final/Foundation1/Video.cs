@@ -21,12 +21,28 @@ public class Video
         Comment comment = new Comment(name, text);
         _comments.Add(comment);
     }
+    public string GetTitle()
+    {
+        return _title;
+    }
+    public string GetAuthor()
+    {
+        return _author;
+    }
+    public int GetDuration()
+    {
+        return _durationInSeconds;
+    }
+    public List<Comment> GetListOfComments()
+    {
+        return _comments;
+    }
     public void DisplayInformation()
     {
-        Console.WriteLine($"\nTitle: {_title}");
-        Console.WriteLine($"Author: {_author}");
-        Console.WriteLine($"Duration: {_durationInSeconds}");
-        Console.WriteLine($"Number of comments: {GetCountOfComments()}\n");
+        Console.WriteLine($"\nTitle: {_title}.");
+        Console.WriteLine($"Author: {_author}.");
+        Console.WriteLine($"Duration: {_durationInSeconds} seconds.");
+        Console.WriteLine($"Number of comments: {GetCountOfComments()}.\n");
         Console.WriteLine("---- Box Comments ----");
         foreach(Comment comment in _comments)
         {
