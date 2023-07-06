@@ -4,7 +4,14 @@ public class Product
     private string _productId;
     private double _price;
     private int _quantity;
-    private void ComputePrice()
+    public Product(string name, string productId, double price, int quantity)
+    {
+        _name = name;
+        _productId = productId;
+        _price = price;
+        _quantity = quantity;
+    }
+    public void ComputePricePerQuantity()
     {
         _price = _price * _quantity;
     }
