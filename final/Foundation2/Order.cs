@@ -10,13 +10,12 @@ public class Order
     {
         _customer = customer;
         _listOfProducts = new List<Product>();
-        _shipCost = 0.0;
     }
     public void ComputeSubTotalPrice()
     {
         foreach(Product product in _listOfProducts)
         {
-            _totalCost += product.GetPrice();
+            _totalCost += product.GetTotalPrice();
         }
         AddShipCost();
         CreatePackingLabel();
@@ -28,14 +27,9 @@ public class Order
         Console.WriteLine($"Ship Cost: $ {_shipCost}");
         Console.WriteLine($"Total: ${_totalCost + _shipCost}\n");
     }
-    public double GetShipCost()
-    {
-        return _shipCost;
-    }
     public void AddProduct(string name, string productId, double price, int quantity)
     {
         Product product = new Product(name, productId, price, quantity);
-        product.ComputePricePerQuantity();
         _listOfProducts.Add(product);
     }
     private void AddShipCost()

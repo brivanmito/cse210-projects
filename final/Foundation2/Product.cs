@@ -2,22 +2,24 @@ public class Product
 {
     private string _name;
     private string _productId;
-    private double _price;
+    private double _individualPrice;
+    private double _quantityPrice;
     private int _quantity;
     public Product(string name, string productId, double price, int quantity)
     {
         _name = name;
         _productId = productId;
-        _price = price;
+        _individualPrice = price;
         _quantity = quantity;
+        CumputeTotalPriceProduct();
     }
-    public void ComputePricePerQuantity()
+    private void CumputeTotalPriceProduct()
     {
-        _price = _price * _quantity;
+        _quantityPrice = _individualPrice * _quantity;
     }
-    public double GetPrice()
+    public double GetTotalPrice()
     {
-        return _price;
+        return _quantityPrice;
     }
     public string GetName()
     {
