@@ -21,7 +21,7 @@ public class Address
     }
     public string CreateAddress()
     {
-        return $"{_streetAddress}\n{_city}\n{_province}\n{_country}";
+        return $"{_streetAddress}\n{_city}\n{_province}\n{_country.ToUpper()}";
     }
 
 }

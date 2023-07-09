@@ -46,14 +46,15 @@ public class Order
     }
     private void CreatePackingLabel()
     {
+        _packingLabel += "PRODUCTS:\n";
         foreach(Product product in _listOfProducts)
         {
-            _packingLabel += $"{product.GetName()} - {product.GetProductId()}\n";
+            _packingLabel += $"- {product.GetProductId()} - {product.GetName()} - ${Math.Round(product.GetTotalPrice(), 2)}\n";
         }
     }
     private void CreateShippingLabel()
     {
-        _shippingLabel = $"{_customer.GetName()}\n{_customer.GetAddress()}";
+        _shippingLabel = $"ADDRESS:\n{_customer.GetName()}\n{_customer.GetAddress()}";
     }
     public string GetPackingLabel()
     {

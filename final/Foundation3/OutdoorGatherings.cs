@@ -7,6 +7,6 @@ public class OutdoorGatherings : Events
     }
     protected override string ShowFullDetails()
     {
-        
+        return "";
     }
 }
