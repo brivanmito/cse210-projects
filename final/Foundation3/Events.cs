@@ -5,7 +5,6 @@ public abstract class Events
     private string _description;
     private DateTime _dateTime;
     private Address _address;
-    private string _aditionalInformation;
     public Events(string eventType, string eventTitle, string description, DateTime datetime, Address address)
     {
         _eventType = eventType;
@@ -14,18 +13,18 @@ public abstract class Events
         _dateTime = datetime;
         _address = address;
     }
-    protected string StandardDetails()
+    public void StandardDetails()
     {
-        return $"Title: {_eventTitle}\nDescription: {_description}\nDate: {_dateTime.Date}\nHour: {_dateTime.Hour}\nAddress: {_address}";
+        Console.WriteLine($"Title: {_eventTitle}\nDescription: {_description}\nDate: {_dateTime.ToShortDateString()}\nTime : {_dateTime.ToShortTimeString()}\nAddress: {_address.GetAddress()}");
     }
-    protected abstract string ShowFullDetails();
-    protected string ShortDescription()
+    public abstract void ShowFullDetails();
+    public void ShortDescription()
     {
-        return $"{_eventType}\n{_eventTitle}\n{_dateTime.Date}";
+        Console.WriteLine($"Event Type: {_eventType}\nEvent Title: {_eventTitle}\nDate: {_dateTime.ToShortDateString()}");
     }
-    protected string GetEventType()
+    public void GetEventType()
     {
-        return _eventType;
+        Console.WriteLine(_eventType);
     }
 
 }

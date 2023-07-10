@@ -9,10 +9,13 @@ public class Receptions : Events
     {
         _rsvp = quantity;
     }
-    protected override string ShowFullDetails()
+    public override void ShowFullDetails()
     {
-        Console.WriteLine("-- Full Details --");
-        return $"{base.StandardDetails()}\n{base.GetEventType()}\n{base.ShortDescription()}";
+        Console.WriteLine("\n");
+        base.StandardDetails();
+        base.ShortDescription();
+        Console.WriteLine($"RSVP: {_rsvp}");
+        Console.WriteLine("\n");
     }
 
 }

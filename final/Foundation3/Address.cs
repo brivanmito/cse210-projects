@@ -11,17 +11,10 @@ public class Address
         _province = province;
         _country = country;
     }
-    public bool IsUSA()
+    public string GetAddress()
     {
-        if(_country == "USA" || _country == "United States")
-        {
-            return true;
-        }
-        return false;
+        return $"{_streetAddress}, {_city}, {_province}, {_country}";
     }
-    public string CreateAddress()
-    {
-        return $"{_streetAddress}\n{_city}\n{_province}\n{_country}";
-    }
+
 
 }
