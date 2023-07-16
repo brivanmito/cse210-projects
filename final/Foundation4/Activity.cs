@@ -25,6 +25,6 @@ public class Activity
     }
     
     public string GetSummary(){
-        return $"{_date.ToString("dd MMM yyyy")} {GetType().Name}\t({GetActivityLength()} min) - Distance {GetDistance().ToString("0.00")} miles, Speed {GetSpeed().ToString("0.00")} mph, Pace: {GetPace().ToString("0.00")} min per mile";
+        return $"{_date.ToString("dd MMM yyyy")} {GetType().Name} ({GetActivityLength()} min) - Distance {GetDistance().ToString("0.00")} miles, Speed {GetSpeed().ToString("0.00")} mph, Pace: {GetPace().ToString("0.00")} min per mile";
     }
 }

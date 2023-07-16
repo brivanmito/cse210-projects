@@ -1,4 +1,5 @@
-class Running : Activity{
+class Running : Activity
+{
     private double _distance;
 
     public Running(double distance, string date, double activityLength) : base(date, activityLength){

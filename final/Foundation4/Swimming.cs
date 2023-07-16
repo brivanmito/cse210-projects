@@ -1,4 +1,5 @@
-class Swimming : Activity{
+class Swimming : Activity
+{
     private int _laps;
     
     public Swimming(int laps, string date, double activityLength) : base(date, activityLength){
